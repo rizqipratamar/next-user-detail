@@ -1,17 +1,23 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-const ListUsersComponent = dynamic(() => import("../src/components/listusers"));
+import { Col, Row } from "antd";
+const FormUser = dynamic(() => import("../src/components/formusers"));
 
-export default function ListUsersPage({ initialUsers }) {
+export default function DetailUserPage() {
   return (
     <div>
       <Head>
-        <title>List Users</title>
+        <title>Detail Users</title>
         <meta name="description" content="User with mock API" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <ListUsersComponent />
+        <Row>
+          <Col span={12}>
+            <FormUser />
+          </Col>
+          <Col span={12}></Col>
+        </Row>
       </main>
     </div>
   );

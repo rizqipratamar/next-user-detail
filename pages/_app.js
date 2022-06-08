@@ -1,15 +1,15 @@
-import { AppWrapper } from "../src/contex";
+import { ContexWrapper } from "../src/contex";
 import "../styles/globals.css";
 import "antd/dist/antd.css";
 import MainLayout from "../src/layout";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AppWrapper>
+    <ContexWrapper>
       <MainLayout>
         <Component {...pageProps} />
       </MainLayout>
-    </AppWrapper>
+    </ContexWrapper>
   );
 }
 

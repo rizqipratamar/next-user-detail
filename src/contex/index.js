@@ -1,14 +1,41 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState, useMemo } from "react";
+const initialStateUser = {
+  id: {
+    name: "",
+    value: "",
+  },
+  name: "",
+  email: "",
+  picture: "",
+  gender: "",
+  location: {
+    city: "",
+    state: "",
+    country: "",
+  },
+  dob: {
+    date: "",
+    age: 0,
+  },
+};
 
-const AppContext = createContext();
+const AppContext = createContext({
+  theme: "",
+  selectedUser: initialStateUser,
+  setSelectedUser: () => {},
+  setTheme: () => {},
+});
 
-export function AppWrapper({ children }) {
-  let sharedState = {
-    theme: "dark",
-  };
+export function ContexWrapper({ children }) {
+  const [theme, setTheme] = useState("light");
+  const [selectedUser, setSelectedUser] = useState(initialStateUser);
 
+  const valueContex = useMemo(
+    () => ({ selectedUser, setSelectedUser, theme, setTheme }),
+    [selectedUser, theme]
+  );
   return (
-    <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={valueContex}>{children}</AppContext.Provider>
   );
 }
 

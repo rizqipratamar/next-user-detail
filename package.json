@@ -12,9 +12,12 @@
     "@ant-design/icons": "^4.7.0",
     "@emotion/css": "^11.9.0",
     "antd": "^4.21.0",
+    "moment": "^2.29.3",
     "next": "12.1.6",
+    "rc-virtual-list": "^3.4.8",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-hook-form": "^7.31.3"
   },
   "devDependencies": {
     "eslint": "8.17.0",
