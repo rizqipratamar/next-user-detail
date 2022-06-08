@@ -1,22 +1,16 @@
 import { createContext, useContext, useState, useMemo } from "react";
 const initialStateUser = {
-  id: {
-    name: "",
-    value: "",
+  name: {
+    first: "",
+    last: "",
   },
-  name: "",
   email: "",
   picture: "",
   gender: "",
-  location: {
-    city: "",
-    state: "",
-    country: "",
-  },
   dob: {
     date: "",
-    age: 0,
   },
+  description: "",
 };
 
 const AppContext = createContext({

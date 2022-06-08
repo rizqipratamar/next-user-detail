@@ -1,40 +1,77 @@
-import { Card, Col, DatePicker, Form, Input, Row, Select } from "antd";
+import { SaveOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Card,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Row,
+  Select,
+} from "antd";
 import moment from "moment";
 import { useForm, Controller } from "react-hook-form";
 import { useAppContext } from "../../contex";
+// import { Form, FormItem, PureFormItem } from "react-hook-form-with-antd";
 
 const FormUser = () => {
-  const { handleSubmit, control } = useForm();
-  const { selectedUser, theme } = useAppContext();
-  const onSubmit = (data) => {};
+  const { selectedUser, setSelectedUser, theme } = useAppContext();
+  const { handleSubmit, control, watch } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      firstName: selectedUser.name.first,
+      lastName: selectedUser.name.last,
+      email: selectedUser.email,
+      birthday: moment(selectedUser.dob.date, "YYYY-MM-DD"),
+      gender: selectedUser.gender,
+      description: selectedUser.description,
+    },
+  });
+
+  const onSubmit = (data) => {
+    setSelectedUser({
+      ...data,
+      name: {
+        first: data.firstName,
+        last: data.lastName,
+      },
+      dob: {
+        date: data.birthday.format("YYYY-MM-DD"),
+      },
+      picture: selectedUser.picture,
+    });
+    message.success(`user updated!`);
+  };
+
   return (
     <Card bordered={false} style={{ width: 500 }}>
-      <Form layout="vertical" onSubmit={handleSubmit(onSubmit)} style={{}}>
-        <Form.Item label="Name">
-          <Controller
-            name="name"
-            control={control}
-            render={({ onChange, value }) => (
-              <Input
-                onChange={onChange}
-                value={value}
-                defaultValue={`${selectedUser.name.first} ${selectedUser.name.last}`}
+      <Form layout="vertical" onSubmit={handleSubmit(onSubmit)}>
+        <Row gutter={16}>
+          <Col span={12} className="gutter-row">
+            <Form.Item label="First Name">
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field }) => <Input {...field} />}
               />
-            )}
-          />
-        </Form.Item>
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item label="Last Name">
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => <Input {...field} />}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item label="Email">
           <Controller
             name="email"
             control={control}
-            render={({ onChange, value }) => (
-              <Input
-                onChange={onChange}
-                value={value}
-                disabled
-                defaultValue={selectedUser.email}
-              />
-            )}
+            render={({ field }) => <Input {...field} />}
           />
         </Form.Item>
         <Row gutter={16}>
@@ -43,12 +80,8 @@ const FormUser = () => {
               <Controller
                 name="gender"
                 control={control}
-                render={({ onChange, value }) => (
-                  <Select
-                    defaultValue={selectedUser.gender}
-                    onChange={onChange}
-                    value={value}
-                  >
+                render={({ field }) => (
+                  <Select defaultValue={selectedUser.gender} {...field}>
                     <Select.Option value="male">Male</Select.Option>
                     <Select.Option value="female">Female</Select.Option>
                   </Select>
@@ -61,13 +94,8 @@ const FormUser = () => {
               <Controller
                 name="birthday"
                 control={control}
-                render={({ onChange, value }) => (
-                  <DatePicker
-                    onChange={onChange}
-                    value={value}
-                    style={{ width: "100%" }}
-                    defaultValue={moment(selectedUser.dob.date, "YYYY-MM-DD")}
-                  />
+                render={({ field }) => (
+                  <DatePicker style={{ width: "100%" }} {...field} />
                 )}
               />
             </Form.Item>
@@ -77,15 +105,19 @@ const FormUser = () => {
           <Controller
             name="description"
             control={control}
-            render={({ onChange, value }) => (
-              <Input.TextArea
-                rows={4}
-                onChange={onChange}
-                value={value}
-                defaultValue={`${selectedUser.name.title} ${selectedUser.name.first} ${selectedUser.name.last} is a ${selectedUser.gender} life at ${selectedUser.location.city} ${selectedUser.location.state} ${selectedUser.location.country}`}
-              />
-            )}
+            render={({ field }) => <Input.TextArea rows={4} {...field} />}
           />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="dashed"
+            htmlType="submit"
+            icon={<SaveOutlined />}
+            size="large"
+            onClick={handleSubmit(onSubmit)}
+          >
+            Save
+          </Button>
         </Form.Item>
       </Form>
     </Card>

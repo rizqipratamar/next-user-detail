@@ -61,7 +61,12 @@ const ListUsersComponent = () => {
                   icon={<EyeOutlined />}
                   size="medium"
                   style={{ marginRight: 20 }}
-                  onClick={() => setSelectedUser(user)}
+                  onClick={() =>
+                    setSelectedUser({
+                      ...user,
+                      description: `${user.name.title} ${user.name.first} ${user.name.last} is a ${user.gender} life at ${user.location.city} ${user.location.state} ${user.location.country}`,
+                    })
+                  }
                 />
               </Link>
             </Tooltip>

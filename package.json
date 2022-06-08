@@ -17,7 +17,8 @@
     "rc-virtual-list": "^3.4.8",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-hook-form": "^7.31.3"
+    "react-hook-form": "^7.31.3",
+    "react-hook-form-with-antd": "^1.7.0"
   },
   "devDependencies": {
     "eslint": "8.17.0",

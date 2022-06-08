@@ -2,12 +2,12 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 const ListUsersComponent = dynamic(() => import("../src/components/listusers"));
 
-export default function ListUsersPage({ initialUsers }) {
+export default function ListUsersPage({ metaData }) {
   return (
     <div>
       <Head>
-        <title>List Users</title>
-        <meta name="description" content="User with mock API" />
+        <title>{metaData.title}</title>
+        <meta name="description" content={metaData.title} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
@@ -17,17 +17,13 @@ export default function ListUsersPage({ initialUsers }) {
   );
 }
 
-// export const getServerSideProps = async () => {
-//   const props = {
-//     initialUsers: [],
-//   };
-//   try {
-//     const initialUsers = await fetch(fakeDataUrl);
-//     const { results } = await initialUsers.json();
-
-//     props.initialUsers = results;
-//   } catch (err) {
-//     console.error(err);
-//   }
-//   return { props };
-// };
+export async function getStaticProps() {
+  return {
+    props: {
+      metaData: {
+        title: "List Users",
+        description: "List random users with mock API from randomuser.me ",
+      },
+    },
+  };
+}
