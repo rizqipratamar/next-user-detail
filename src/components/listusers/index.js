@@ -4,13 +4,14 @@ import { Avatar, Button, List, message, Tooltip } from "antd";
 import Link from "next/link";
 import VirtualList from "rc-virtual-list";
 import { useAppContext } from "../../contex";
+import { css } from "@emotion/css";
 const fakeDataUrl =
   "https://randomuser.me/api/?results=20&inc=id,name,gender,dob,location,email,nat,picture&noinfo";
 const ContainerHeight = 500;
 
 const ListUsersComponent = () => {
   const [lisUsers, setListUsers] = useState([]);
-  const { setSelectedUser } = useAppContext();
+  const { setSelectedUser, theme } = useAppContext();
 
   const appendMoreUsers = () => {
     fetch(fakeDataUrl)
@@ -47,7 +48,17 @@ const ListUsersComponent = () => {
         onScroll={onScroll}
       >
         {(user) => (
-          <List.Item key={user.email}>
+          <List.Item
+            key={user.email}
+            className={css`
+              padding: 5px;
+              background-color: ${theme.selected};
+              border-radius: 5px;
+              &:hover {
+                background-color: white;
+              }
+            `}
+          >
             <List.Item.Meta
               avatar={<Avatar src={user.picture.large} />}
               title={`${user.name.first} ${user.name.last}`}
@@ -60,7 +71,7 @@ const ListUsersComponent = () => {
                   shape="circle"
                   icon={<EyeOutlined />}
                   size="medium"
-                  style={{ marginRight: 20 }}
+                  className={css(`margin-right: 20px;`)}
                   onClick={() =>
                     setSelectedUser({
                       ...user,

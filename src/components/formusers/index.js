@@ -13,7 +13,7 @@ import {
 import moment from "moment";
 import { useForm, Controller } from "react-hook-form";
 import { useAppContext } from "../../contex";
-// import { Form, FormItem, PureFormItem } from "react-hook-form-with-antd";
+import { css } from "@emotion/css";
 
 const FormUser = () => {
   const { selectedUser, setSelectedUser, theme } = useAppContext();
@@ -45,7 +45,12 @@ const FormUser = () => {
   };
 
   return (
-    <Card bordered={false} style={{ width: 500 }}>
+    <Card
+      bordered={false}
+      className={css(`
+      width: 500
+    `)}
+    >
       <Form layout="vertical" onSubmit={handleSubmit(onSubmit)}>
         <Row gutter={16}>
           <Col span={12} className="gutter-row">
@@ -95,7 +100,12 @@ const FormUser = () => {
                 name="birthday"
                 control={control}
                 render={({ field }) => (
-                  <DatePicker style={{ width: "100%" }} {...field} />
+                  <DatePicker
+                    className={css(`
+                    width: 100%;
+                  `)}
+                    {...field}
+                  />
                 )}
               />
             </Form.Item>

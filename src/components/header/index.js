@@ -1,13 +1,13 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Avatar, Button, PageHeader, Row, Tooltip } from "antd";
+import { Button, PageHeader, Row, Tooltip } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAppContext } from "../../contex";
+import { css } from "@emotion/css";
+import ThemeSelector from "../themeselector";
 
 const HeaderLayout = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { selectedUser, theme } = useAppContext();
   return (
     <>
       <Row>
@@ -22,7 +22,9 @@ const HeaderLayout = () => {
                       shape="circle"
                       icon={<ArrowLeftOutlined />}
                       size="small"
-                      style={{ marginRight: "10px" }}
+                      className={css(`
+                        margin-right: 10px;
+                      `)}
                     />
                   </Link>
                 </Tooltip>
@@ -34,6 +36,10 @@ const HeaderLayout = () => {
           }
           subTitle={`${id ? "Detail user" : "List random"} from randomuser.me`}
         />
+        <div className={css(`margin-top: 20px`)}>
+          <span className={css(`margin-right: 20px`)}>Change Theme</span>
+          <ThemeSelector />
+        </div>
       </Row>
     </>
   );

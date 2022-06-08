@@ -13,15 +13,20 @@ const initialStateUser = {
   description: "",
 };
 
+const initialStateTheme = {
+  selected: "white",
+  list: ["white", "turquoise", "hotpink"],
+};
+
 const AppContext = createContext({
-  theme: "",
+  theme: initialStateTheme,
   selectedUser: initialStateUser,
   setSelectedUser: () => {},
   setTheme: () => {},
 });
 
 export function ContexWrapper({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(initialStateTheme);
   const [selectedUser, setSelectedUser] = useState(initialStateUser);
 
   const valueContex = useMemo(
