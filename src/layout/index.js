@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
+import dynamic from "next/dynamic";
 import FooterLayout from "../components/footer";
-import HeaderLayout from "../components/header";
+const HeaderLayout = dynamic(() => import("../components/header"));
 
 const MainLayout = ({ children }) => (
   <div

@@ -1,7 +1,9 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Col, Row } from "antd";
-import CardDetailUser from "../src/components/carddetailuser";
+const CardDetailUser = dynamic(() =>
+  import("../src/components/carddetailuser")
+);
 const FormUser = dynamic(() => import("../src/components/formusers"));
 
 export default function DetailUserPage({}) {

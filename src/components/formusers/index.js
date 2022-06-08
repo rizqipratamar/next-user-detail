@@ -48,7 +48,7 @@ const FormUser = () => {
     <Card
       bordered={false}
       className={css(`
-      width: 500
+      width: 500;
     `)}
     >
       <Form layout="vertical" onSubmit={handleSubmit(onSubmit)}>

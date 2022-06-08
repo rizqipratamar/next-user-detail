@@ -3,7 +3,8 @@ import { Button, PageHeader, Row, Tooltip } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { css } from "@emotion/css";
-import ThemeSelector from "../themeselector";
+import dynamic from "next/dynamic";
+const ThemeSelector = dynamic(() => import("../themeselector"));
 
 const HeaderLayout = () => {
   const router = useRouter();
@@ -36,10 +37,12 @@ const HeaderLayout = () => {
           }
           subTitle={`${id ? "Detail user" : "List random"} from randomuser.me`}
         />
-        <div className={css(`margin-top: 20px`)}>
-          <span className={css(`margin-right: 20px`)}>Change Theme</span>
-          <ThemeSelector />
-        </div>
+        {!id && (
+          <div className={css(`margin-top: 20px`)}>
+            <span className={css(`margin-right: 20px`)}>Change Theme</span>
+            <ThemeSelector />
+          </div>
+        )}
       </Row>
     </>
   );

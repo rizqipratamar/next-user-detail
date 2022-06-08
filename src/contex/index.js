@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 const initialStateUser = {
   name: {
     first: "",
@@ -28,6 +28,12 @@ const AppContext = createContext({
 export function ContexWrapper({ children }) {
   const [theme, setTheme] = useState(initialStateTheme);
   const [selectedUser, setSelectedUser] = useState(initialStateUser);
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme) {
+      setTheme(JSON.parse(theme));
+    }
+  }, []);
 
   const valueContex = useMemo(
     () => ({ selectedUser, setSelectedUser, theme, setTheme }),

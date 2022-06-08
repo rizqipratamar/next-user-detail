@@ -7,12 +7,18 @@ const ThemeSelector = () => {
   const { theme, setTheme } = useAppContext();
   return (
     <Select
-      defaultValue={"white"}
+      defaultValue={theme.selected}
       className={css(`
       width: 120px ;
       border-radius: 12px;
       `)}
-      onChange={(value) => setTheme({ ...theme, selected: value })}
+      onChange={(value) => {
+        setTheme({ ...theme, selected: value });
+        localStorage.setItem(
+          "theme",
+          JSON.stringify({ ...theme, selected: value })
+        );
+      }}
     >
       {theme.list?.map((theme, index) => (
         <Option value={theme} key={index}>
