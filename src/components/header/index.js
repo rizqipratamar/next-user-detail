@@ -14,6 +14,7 @@ const HeaderLayout = () => {
       <Row>
         <PageHeader
           className="site-page-header"
+          data-testid="title-page"
           title={
             id ? (
               <>

@@ -39,52 +39,54 @@ const ListUsersComponent = () => {
   };
 
   return (
-    <List>
-      <VirtualList
-        data={lisUsers}
-        height={ContainerHeight}
-        itemHeight={45}
-        itemKey="email"
-        onScroll={onScroll}
-      >
-        {(user) => (
-          <List.Item
-            key={user.email}
-            className={css`
-              padding: 5px;
-              background-color: ${theme.selected};
-              border-radius: 5px;
-              &:hover {
-                background-color: white;
-              }
-            `}
-          >
-            <List.Item.Meta
-              avatar={<Avatar src={user.picture.large} />}
-              title={`${user.name.first} ${user.name.last}`}
-              description={user.email}
-            />
-            <Tooltip title="See Detail">
-              <Link href={user.email}>
-                <Button
-                  type="dashed"
-                  shape="circle"
-                  icon={<EyeOutlined />}
-                  size="medium"
-                  className={css(`margin-right: 20px;`)}
-                  onClick={() =>
-                    setSelectedUser({
-                      ...user,
-                      description: `${user.name.title} ${user.name.first} ${user.name.last} is a ${user.gender} life at ${user.location.city} ${user.location.state} ${user.location.country}`,
-                    })
-                  }
-                />
-              </Link>
-            </Tooltip>
-          </List.Item>
-        )}
-      </VirtualList>
-    </List>
+    <div data-testid="list-users">
+      <List>
+        <VirtualList
+          data={lisUsers}
+          height={ContainerHeight}
+          itemHeight={45}
+          itemKey="email"
+          onScroll={onScroll}
+        >
+          {(user) => (
+            <List.Item
+              key={user.email}
+              className={css`
+                padding: 5px;
+                background-color: ${theme.selected};
+                border-radius: 5px;
+                &:hover {
+                  background-color: white;
+                }
+              `}
+            >
+              <List.Item.Meta
+                avatar={<Avatar src={user.picture.large} />}
+                title={`${user.name.first} ${user.name.last}`}
+                description={user.email}
+              />
+              <Tooltip title="See Detail">
+                <Link href={user.email}>
+                  <Button
+                    type="dashed"
+                    shape="circle"
+                    icon={<EyeOutlined />}
+                    size="medium"
+                    className={css(`margin-right: 20px;`)}
+                    onClick={() =>
+                      setSelectedUser({
+                        ...user,
+                        description: `${user.name.title} ${user.name.first} ${user.name.last} is a ${user.gender} life at ${user.location.city} ${user.location.state} ${user.location.country}`,
+                      })
+                    }
+                  />
+                </Link>
+              </Tooltip>
+            </List.Item>
+          )}
+        </VirtualList>
+      </List>
+    </div>
   );
 };
 

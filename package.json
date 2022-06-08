@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "jest --watch",
     "lint": "next lint"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/css": "^11.9.0",
     "antd": "^4.21.0",
+    "jest-environment-jsdom": "^28.1.1",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "rc-virtual-list": "^3.4.8",
@@ -21,7 +23,10 @@
     "react-hook-form-with-antd": "^1.7.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
     "eslint": "8.17.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "12.1.6",
+    "jest": "^28.1.1"
   }
 }

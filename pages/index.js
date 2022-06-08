@@ -6,12 +6,14 @@ export default function ListUsersPage({ metaData }) {
   return (
     <div>
       <Head>
-        <title>{metaData.title}</title>
-        <meta name="description" content={metaData.title} />
+        <title data-testid="title-page">{metaData?.title}</title>
+        <meta name="description" content={metaData?.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <ListUsersComponent />
+        <div data-testid="list-users">
+          <ListUsersComponent />
+        </div>
       </main>
     </div>
   );
